@@ -54,6 +54,7 @@ Before a real competition round, check the current CyberPatriot rules with your 
 |---|---|
 | `config.conf.example` | Template. Copy to `config.conf` and fill in from the round's README. |
 | `configs/` | Filled-in examples for two practice images (no passwords). |
+| `.claude/skills/cp-config/SKILL.md` | Instructions for an AI model to write `config.conf` from a pasted README. In Claude Code, open this folder and type `/cp-config`; with any other model, paste the file followed by the README. Check its output against the README before applying. |
 | `collect.sh` | Practice only: uploads the run log to a receiver on the host PC for debugging. Not needed normally. |
 | `run-all.sh` | Menu, or `--audit` / `--apply` for all or selected modules. |
 | `10-users.sh` … `120-updates.sh` | One module per category. Each takes `--audit` (default) or `--apply`. |
