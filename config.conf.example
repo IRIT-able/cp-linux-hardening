@@ -1,0 +1,76 @@
+# config.conf - fill this in from the round's README BEFORE running anything with --apply.
+# Copy this file to config.conf. It is a bash file: arrays are (space separated), strings are "quoted".
+# Use single quotes around passwords so $ and ! are not expanded.
+# The example values are the CP17 Ubuntu 22 Training Round README. Replace all of them.
+
+# ---- README: "Authorized Administrators" (names only, drop "(you)") ----
+AUTHORIZED_ADMINS=(perry carlos kan alice josefina)
+
+# ---- README: "Authorized Users" ----
+AUTHORIZED_USERS=(jaimie adalbern amayas fabienne mariya cornelius harold taran felix angela rais
+                  miriam aldo timothy leilani viktor linda jeanne martin josef roger stacy suzy liz)
+
+# The account marked "(you)". It is never deleted, never loses sudo, and its password is never changed.
+CURRENT_USER="perry"
+
+# ---- README: "Critical Services" (systemd names; sshd and ssh are treated as the same) ----
+# These are never stopped, disabled or removed, and are started if found stopped.
+REQUIRED_SERVICES=(sshd)
+
+# ---- README: software that must stay installed (apt package names) ----
+# Examples: firefox thunderbird perl google-chrome-stable chromium
+# Audit mode tells you if a name here is not an installed package, so you can fix the spelling.
+REQUIRED_PACKAGES=(firefox thunderbird perl)
+
+# ---- README: "Management now requires ... installed" (apt package names) ----
+INSTALL_PACKAGES=(x2goserver)
+
+# ---- Decisions you make after reading the audit ----
+# Services to disable without being asked. Others found are offered one by one.
+DISABLE_SERVICES=()
+# Packages to purge without being asked. Others found are offered one by one.
+REMOVE_PACKAGES=()
+# Files to delete: hacking-tool archives and the like that the audit reports (absolute paths).
+REMOVE_FILES=()                  # e.g. (/usr/games/pyrdp-master.zip)
+
+# ---- README: group requests ----
+GROUPS_CREATE=()                 # e.g. (spider)
+GROUP_ADD=("mariya:pioneers")    # "user:group", one entry per user
+
+# ---- README: new accounts. "name:admin" or "name:standard". The name must also be in a list above. ----
+NEW_USERS=()                     # e.g. ("edarby:admin")
+
+# ---- Passwords to set: "user:password". Use for admins whose README password is weak, and for new users. ----
+SET_PASSWORDS=()                 # e.g. ('alice:Str0ng&Long-Passphrase!')
+
+# Users who must change their password at next login (only when the README asks for it).
+FORCE_PW_CHANGE=()               # e.g. (edarby)
+
+# ---- Forensics ----
+# Leave "no" until every Forensics Question is answered and saved.
+# While "no", --apply will not delete users, media files or packages, or kill listeners.
+FORENSICS_DONE="no"
+
+# ---- Media ----
+# Media files under these paths are reported but never deleted (deleting FTP/web content cost 5 points in two keys).
+MEDIA_KEEP_PATHS=(/srv /var/www)
+
+# ---- Firewall ----
+# Ports for REQUIRED_SERVICES are allowed automatically. Add anything else here, in ufw syntax.
+UFW_ALLOW=()                     # e.g. ("8080/tcp")
+
+# ---- Policy values (defaults satisfy every key read so far) ----
+PASS_MINLEN=12
+PASS_MAX_DAYS=90
+PASS_MIN_DAYS=2
+PASS_REMEMBER=5
+ENABLE_LOCKOUT="ask"             # ask | yes | no   (pam_faillock; test on a snapshot first)
+SYSCTL_EXTRA="yes"               # also apply the hardening values suggested in Ubuntu's stock /etc/sysctl.conf
+ALLOW_IP_FORWARD="no"            # "yes" only if the README says this machine routes traffic
+
+# ---- FTP (only used when vsftpd is in REQUIRED_SERVICES) ----
+# "anonymous-only" when the README says users may log in to FTP only as anonymous. Otherwise leave empty.
+FTP_MODE=""
+FTP_ROOT="/srv/ftp"              # where the README says the FTP files live
+FTP_ANON_ROOT="/var/ftp"         # value written to anon_root; created as a link to FTP_ROOT if missing.
+                                 # The CP19 Mint image scored only with /var/ftp. Set equal to FTP_ROOT to skip the link.

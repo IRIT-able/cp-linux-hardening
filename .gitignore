@@ -1,0 +1,5 @@
+# the filled-in config for the image you are working on (may hold passwords)
+/config.conf
+# answer keys are AFA/CyberPatriot documents - not redistributed here
+*.pdf
+*.tar.gz
