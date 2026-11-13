@@ -1,5 +1,7 @@
 # CyberPatriot Linux hardening scripts
 
+> **Windows:** the Windows 10/11 and Server scripts are in [`windows/`](windows/README.md), with their own README and config format.
+
 Bash scripts for Ubuntu 22.04 / 24.04, Linux Mint 21 and Debian 12 practice and competition prep.
 
 **Debian 12 has had one real run** (CP19 Training Round 2: 75 on the first pass, 100 after three script fixes; see `coverage.md`). It uses the same tools as Ubuntu (apt, PAM with `pam-auth-update`, systemd, `sudo` group), so the modules run unchanged. Known differences the scripts account for: GDM settings live in `/etc/gdm3/daemon.conf`; login events are in the journal rather than `/var/log/auth.log`; `ufw` is not installed by default (module 40 installs it); the browser package is `firefox-esr`; package sources may be in `/etc/apt/sources.list.d/debian.sources`. Things to watch on a Debian image: `sudo` may not be installed or the `(you)` account may not be in the `sudo` group; root often has a real password, which is only reported; and the lockout recipe used is the Ubuntu one.
